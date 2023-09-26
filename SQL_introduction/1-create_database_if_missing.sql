@@ -8,11 +8,15 @@ MYSQL_PASSWORD="your_mysql_password"
 DATABASE_NAME="hbtn_0c_0"
 
 # Create a connection to MySQL with the specified database name
-mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$DATABASE_NAME" <<EOF
+mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" <<EOF
 -- This script creates the database hbtn_0c_0 if it doesn't exist.
 -- If the database already exists, it will connect to it.
 
--- No explicit SQL statement is used to create the database.
+-- Create the database if it doesn't exist (ignore any errors)
+CREATE DATABASE IF NOT EXISTS $DATABASE_NAME;
+
+-- Use the specified database for subsequent queries
+USE $DATABASE_NAME;
 
 -- Your SQL queries and commands can go here.
 -- For example:
