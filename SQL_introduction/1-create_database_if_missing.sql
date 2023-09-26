@@ -1,24 +1,25 @@
--- This SQL file contains a set of queries to retrieve customer information.
+#!/bin/bash
 
--- Query 1: Retrieve the list of customers who made a purchase in the last 30 days.
-SELECT first_name, last_name, email
-FROM customers
-WHERE purchase_date >= DATE_SUB(NOW(), INTERVAL 30 DAY);
+# MySQL credentials
+MYSQL_USER="your_mysql_username"
+MYSQL_PASSWORD="your_mysql_password"
 
--- Query 2: Retrieve the total revenue generated from these customers.
-SELECT SUM(order_total) AS total_revenue
-FROM orders
-WHERE customer_id IN (
-    SELECT customer_id
-    FROM customers
-    WHERE purchase_date >= DATE_SUB(NOW(), INTERVAL 30 DAY)
-);
+# Database name to create
+DATABASE_NAME="hbtn_0c_0"
 
--- Query 3: Find the most active customer based on the number of orders.
-SELECT customer_id, COUNT(*) AS order_count
-FROM orders
-GROUP BY customer_id
-ORDER BY order_count DESC
-LIMIT 1;
+# Create a connection to MySQL with the specified database name
+mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$DATABASE_NAME" <<EOF
+-- This script creates the database hbtn_0c_0 if it doesn't exist.
+-- If the database already exists, it will connect to it.
 
--- Feel free to add more queries and comments as needed.
+-- No explicit SQL statement is used to create the database.
+
+-- Your SQL queries and commands can go here.
+-- For example:
+-- CREATE TABLE IF NOT EXISTS my_table (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     name VARCHAR(255)
+-- );
+
+-- Remember to end your script with 'EOF'.
+EOF
