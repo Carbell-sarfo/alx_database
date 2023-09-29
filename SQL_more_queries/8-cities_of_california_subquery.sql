@@ -7,10 +7,9 @@ USE hbtn_0d_usa;
 -- List the cities of California using a correlated subquery
 SELECT cities.id, cities.name
 FROM cities
-WHERE EXISTS (
-    SELECT 1
+WHERE cities.state_id = (
+    SELECT state_id
     FROM states
-    WHERE states.name = 'California'
-    AND states.id = cities.state_id
+    WHERE name = 'California'
 )
 ORDER BY cities.id;
